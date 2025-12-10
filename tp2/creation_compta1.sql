@@ -1,46 +1,40 @@
 CREATE TABLE article (
-    id INT,
-    ref VARCHAR(10),
-    designation VARCHAR(50),
-    prix FLOAT(7,2),
-    id_fou INT
+    id INT NOT NULL PRIMARY KEY,
+    ref VARCHAR(10) NOT NULL,
+    designation VARCHAR(50) NOT NULL,
+    prix FLOAT(7,2) NOT NULL,
+    id_fou INT NOT NULL
 );
 
 
 CREATE TABLE fournisseur (
-    id INT,
+    id INT NOT NULL PRIMARY KEY,
     nom VARCHAR(50) NOT NULL
 );
 
 
 CREATE TABLE bon (
-    id INT,
-    numero VARCHAR(30),
-    date_cmde DATE,
-    delai DATE,
-    id_fou INT
+    id INT NOT NULL PRIMARY KEY,
+    numero INT NOT NULL,
+    date_cmde DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    delai INT,
+    id_fou INT NOT NULL
 );
 
 CREATE TABLE compo (
-    id INT,
-    qte INT,
-    id_art INT,
-    id_bon INT
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    qte INT NOT NULL,
+    id_art INT NOT NULL,
+    id_bon INT NOT NULL
 );
 
-ALTER TABLE fournisseur
-    ADD CONSTRAINT pk_fournisseur PRIMARY KEY (id);
 
 ALTER TABLE article
-    ADD CONSTRAINT pk_article PRIMARY KEY (id),
     ADD CONSTRAINT fk_article_fournisseur FOREIGN KEY (id_fou) REFERENCES fournisseur(id);
 
 ALTER TABLE bon
-    ADD CONSTRAINT pk_bon PRIMARY KEY (id),
     ADD CONSTRAINT fk_bon_fournisseur FOREIGN KEY (id_fou) REFERENCES fournisseur(id);
 
 ALTER TABLE compo
-    MODIFY id INT AUTO_INCREMENT,
-    ADD CONSTRAINT pk_compo PRIMARY KEY (id),
     ADD CONSTRAINT fk_compo_article FOREIGN KEY (id_art) REFERENCES article(id),
     ADD CONSTRAINT fk_compo_bon FOREIGN KEY (id_bon) REFERENCES bon(id);

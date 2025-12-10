@@ -16,7 +16,7 @@ INSERT INTO article (id, ref, designation, prix, id_fou) VALUES
 (10, 'F04', 'Fraises d''encastrement', 8.14, 2);
 
 INSERT INTO bon (id, numero, date_cmde, delai, id_fou) VALUES
-(1, '001', '2024-12-12', '2024-12-15', 1);
+(1, '1', now(), '3', 1);
 
 INSERT INTO compo (qte, id_art, id_bon) VALUES
 (3, 1, 1),
