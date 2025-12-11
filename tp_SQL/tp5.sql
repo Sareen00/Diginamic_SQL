@@ -29,7 +29,7 @@ WHERE f.nom = 'Française d''Imports';
 --e
 UPDATE article
 SET designation = CONCAT(
-    SUBSTRING(designation, 1, POSITION('(' IN designation) - 1),  -- avant la parenthèse
-    SUBSTRING(designation, POSITION(')' IN designation) + 1)     -- après la parenthèse
+    SUBSTRING(designation, 1, POSITION('(' IN designation) - 1),
+    SUBSTRING(designation, POSITION(')' IN designation) + 1)
 )
 WHERE designation LIKE '%(%';
